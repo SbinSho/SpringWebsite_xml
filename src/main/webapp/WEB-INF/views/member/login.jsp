@@ -58,6 +58,7 @@
       <input type="checkbox" value="remember-me"> Remember me
     </label>
   </div>
+  <button class="btn btn-lg btn-primary btn-block" type="/cutomer/register">회원가입</button>
   <button class="btn btn-lg btn-primary btn-block" type="submit">로그인</button>
   <p class="mt-5 mb-3 text-muted">Â© 2017-2020</p>
 </form>
