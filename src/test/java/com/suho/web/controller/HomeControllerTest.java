@@ -29,11 +29,11 @@ public class HomeControllerTest {
 	public void setUp() {
 		// Setup with StandAlone
 		// 컨트롤러 단독으로 테스트하는 방법
-//		this.mvc = MockMvcBuilders.standaloneSetup(new HomeController()).build();
+		this.mvc = MockMvcBuilders.standaloneSetup(new HomeController()).build();
 		
 		// Setup with Application Configuraion
 		// 정의된 웹 어플리케이션 컨텍스트를 이용한 방법
-		this.mvc = MockMvcBuilders.webAppContextSetup(this.context).build();
+//		this.mvc = MockMvcBuilders.webAppContextSetup(this.context).build();
 		
 	}
 	
