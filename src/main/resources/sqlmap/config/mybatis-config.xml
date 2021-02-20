@@ -8,5 +8,10 @@
 	  <setting name="useGeneratedKeys" value="false"/>
 	  <setting name="mapUnderscoreToCamelCase" value="true"/>
 	</settings>
+	
+	<typeAliases>
+		<typeAlias alias="memberVO" type="com.suho.web.domain.MemberVO"/>
+	
+	</typeAliases>
 
 </configuration>

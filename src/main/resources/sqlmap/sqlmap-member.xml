@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="memberVO">
+
+	<insert id="create">
+		insert into member (userid, userpwd, username)
+		values (#{userid}, #{userpwd}, #{username})
+	</insert>
+
+	<select id="list" resultType="memberVO">
+		SELECT * FROM member
+	</select>
+
+
+</mapper>

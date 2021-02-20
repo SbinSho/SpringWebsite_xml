@@ -105,32 +105,30 @@
 </head>
 <body>
 <div class="signup-form">
-    <form action="/examples/actions/confirmation.php" method="post">
-		<h2>Register</h2>
+    <form action="/member/join" method="post">
+		<h2>회원가입</h2>
 		<p class="hint-text">Create your account. It's free and only takes a minute.</p>
         <div class="form-group">
-			<div class="row">
-				<div class="col"><input type="text" class="form-control" name="first_name" placeholder="First Name" required="required"></div>
-				<div class="col"><input type="text" class="form-control" name="last_name" placeholder="Last Name" required="required"></div>
-			</div>        	
+			<input type="text" class="form-control" name="username" placeholder="이름" required="required">
         </div>
+
         <div class="form-group">
-        	<input type="email" class="form-control" name="email" placeholder="Email" required="required">
+			<input type="text" class="form-control" name="userid" placeholder="아이디" required="required">
         </div>
 		<div class="form-group">
-            <input type="password" class="form-control" name="password" placeholder="Password" required="required">
+            <input type="password" class="form-control" name="userpwd" placeholder="비밀번호" required="required">
         </div>
 		<div class="form-group">
-            <input type="password" class="form-control" name="confirm_password" placeholder="Confirm Password" required="required">
-        </div>        
-        <div class="form-group">
-			<label class="form-check-label"><input type="checkbox" required="required"> I accept the <a href="#">Terms of Use</a> &amp; <a href="#">Privacy Policy</a></label>
-		</div>
+            <input type="password" class="form-control" name="confirm_password" placeholder="비밀번호 확인" required="required">
+        </div>
+<!--         <div class="form-group"> -->
+<!-- 			<label class="form-check-label"><input type="checkbox" required="required"> I accept the <a href="#">Terms of Use</a> &amp; <a href="#">Privacy Policy</a></label> -->
+<!-- 		</div> -->
 		<div class="form-group">
-            <button type="submit" class="btn btn-success btn-lg btn-block">Register Now</button>
+            <button type="submit" class="btn btn-success btn-lg btn-block">회원가입</button>
         </div>
     </form>
-	<div class="text-center">Already have an account? <a href="#">Sign in</a></div>
+	<div class="text-center">Already have an account? <a href="<c:url value='/member/login'/>">로그인</a></div>
 </div>
 </body>
 </html>
