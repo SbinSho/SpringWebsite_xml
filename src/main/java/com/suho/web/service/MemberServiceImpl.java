@@ -16,14 +16,20 @@ public class MemberServiceImpl implements MemberService{
 
 	
 	@Override
-	public void create(MemberVO vo){
+	public void create(MemberVO vo) throws Exception{
 		mDao.create(vo);
 	}
 
 	
 	@Override
-	public List<MemberVO> listAll(){
+	public List<MemberVO> listAll() throws Exception{
 		return mDao.listAll();
+	}
+
+
+	@Override
+	public int idCheck(String userid) throws Exception {
+		return mDao.idCheck(userid);
 	}
 
 	

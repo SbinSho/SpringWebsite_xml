@@ -15,20 +15,26 @@ public class MemberDaoImpl implements MemberDao {
 	private SqlSessionTemplate sqlSessionTemplate;
 
 	@Autowired
-	public void setSqlSessionTemplate(SqlSessionTemplate sqlSessionTemplate) {
+	public void setSqlSessionTemplate(SqlSessionTemplate sqlSessionTemplate) throws Exception {
 		this.sqlSessionTemplate = sqlSessionTemplate;
 	}
 
 	@Override
-	public void create(MemberVO vo){
+	public void create(MemberVO vo) throws Exception {
 		sqlSessionTemplate.insert("create", vo);
 	}
 
 	@Override
-	public List<MemberVO> listAll(){
+	public List<MemberVO> listAll() throws Exception{
 		return sqlSessionTemplate.selectList("list");
 	}
 
+	@Override
+	public int idCheck(String userid) throws Exception {
+		return sqlSessionTemplate.selectOne("idCheck", userid);
+	}
+
+	
 	
 	
 	

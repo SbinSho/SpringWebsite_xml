@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -105,30 +106,100 @@
 </head>
 <body>
 <div class="signup-form">
-    <form action="/member/join" method="post">
+    <form:form commandName="memberVO" method="post">
 		<h2>회원가입</h2>
 		<p class="hint-text">Create your account. It's free and only takes a minute.</p>
         <div class="form-group">
-			<input type="text" class="form-control" name="username" placeholder="이름" required="required">
+			<form:input path="username" type="text" class="form-control" placeholder="이름"/>
+			<form:errors path="username" />
         </div>
 
         <div class="form-group">
-			<input type="text" class="form-control" name="userid" placeholder="아이디" required="required">
+			<form:input  path="userid" id="userid" type="text" class="form-control" placeholder="아이디" />
+			<form:errors path="userid"/>
+			<span id="userid_check"></span>
         </div>
 		<div class="form-group">
-            <input type="password" class="form-control" name="userpwd" placeholder="비밀번호" required="required">
+            <form:input  path="userpwd" type="password" class="form-control" id="passowrd" name="userpwd" placeholder="비밀번호" />
+            <form:errors path="userpwd" />
         </div>
 		<div class="form-group">
-            <input type="password" class="form-control" name="confirm_password" placeholder="비밀번호 확인" required="required">
+            <input type="password" class="form-control" id="confirm_password" placeholder="비밀번호 확인">
+           	<span id="password_check"></span>
         </div>
-<!--         <div class="form-group"> -->
-<!-- 			<label class="form-check-label"><input type="checkbox" required="required"> I accept the <a href="#">Terms of Use</a> &amp; <a href="#">Privacy Policy</a></label> -->
-<!-- 		</div> -->
 		<div class="form-group">
-            <button type="submit" class="btn btn-success btn-lg btn-block">회원가입</button>
+            <button type="submit" class="btn btn-primary btn-lg btn-block">회원가입</button>
         </div>
-    </form>
-	<div class="text-center">Already have an account? <a href="<c:url value='/member/login'/>">로그인</a></div>
+    </form:form>
+    
+	<div class="text-center">
+		Already have an account? <a href="<c:url value='/member/login'/>">로그인</a>
+	</div>
 </div>
+
+<script>
+	// 프론트에서 유효성 검사 -> spring valid 유효성 검사 -> DB 회원가입 정보 추가
+	
+	
+	// 아이디 유효성 검사
+	$("#userid").blur(function(){
+		// naver ID 정규식 검사
+		var isID = /^[a-z0-9][a-z0-9_\-]{4,19}$/;
+		var userid = $("#userid").val();
+
+		if(userid == ""){
+			$("#userid_check").html("아이디를 입력해주세요!");
+			return false;
+		}
+
+		if(!(isID.test(userid))){
+			$("#userid_check").html("5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다.");
+			return false;
+		}
+		
+		$.ajax({
+			type : "POST",
+			data : { id : userid },
+			url : "/member/idCheck",
+			dataType: 'json',
+			success : function(data){
+				if(data == 1){
+					$("#userid_check").html("이미 사용중이거나 탈퇴한 아이디입니다.");
+				}
+				else {
+					$("#userid_check").html("멋진 아이디네요!");
+				}
+			},
+			error : function(error){
+				console.log(error);
+			},
+			
+		});
+
+	});
+
+	// 패스워드 유효성 검사
+	$("#password").blur(function(){
+		var password = $("#password").val();
+
+		
+
+	});
+
+	// 패스워드 확인란 체크
+	$("#confirm_password").blur(function(){
+		
+		var password = $("#passowrd").val();
+		var confirm_password = $("#confirm_password").val();
+
+		if( password == confirm_password){
+			$("#password_check").html("패스워드 확인 완료!");
+		} else {
+			$("#password_check").html("비밀번호를 확인해주세요.");
+		}
+
+	});
+</script>
+
 </body>
 </html>

@@ -43,7 +43,7 @@
             <a class="nav-link" href="#">Services</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="<c:url value='/member/login'/>">sign up</a>
+            <a class="nav-link" href="<c:url value='/member/login'/>">로그인</a>
           </li>
         </ul>
       </div>
