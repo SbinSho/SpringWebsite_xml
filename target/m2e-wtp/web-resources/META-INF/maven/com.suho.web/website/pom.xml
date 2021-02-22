@@ -152,7 +152,7 @@
 			<version>5.1.3.Final</version>
 		</dependency>
 
-		<!-- JSON 사용을 위한 의존설정 -->
+		<!-- Jackson 라이브러리 사용을 위한 의존설정 -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>

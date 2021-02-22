@@ -48,12 +48,17 @@ public class MemberController {
 	// 회원가입 처리
 	@RequestMapping(value = "/join", method = RequestMethod.POST)
 	public String join(@Valid MemberVO memberVO, BindingResult bindingResult) throws Exception {
+
+		logger.info("/join post 요청");
 		
 		if(bindingResult.hasErrors()) {
+			
+			logger.info("MemberVO 객체 유효성 검사 실패");
 			return "/member/join";
+			
 		} else {
 			
-			logger.info("/join post 요청");
+			
 			logger.info("전달 데이터 : " + memberVO);
 			
 			memberService.create(memberVO);

@@ -2,18 +2,20 @@ package com.suho.web.domain;
 
 import java.sql.Timestamp;
 
-import org.hibernate.validator.constraints.NotEmpty;
+
+import org.hibernate.validator.constraints.NotBlank;
 
 public class MemberVO {
 	
-	@NotEmpty(message = "아이디를 입력하세요.")
+	@NotBlank
 	private String userid;
 	
-	@NotEmpty(message = "비밀번호를 입력하세요.")
+	@NotBlank
 	private String userpwd;
 	
-	@NotEmpty(message = "이름을 입력하세요.")
+	@NotBlank
 	private String username;
+	
 	private Timestamp rdate;
 
 	public String getUserid() {
