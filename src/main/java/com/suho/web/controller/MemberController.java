@@ -5,6 +5,7 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,6 +22,9 @@ public class MemberController {
 	
 	@Autowired
 	private MemberService memberService;
+	
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
 	
 	// 로그확인을 위한 구문
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
@@ -49,6 +53,8 @@ public class MemberController {
 	@RequestMapping(value = "/join", method = RequestMethod.POST)
 	public String join(@Valid MemberVO memberVO, BindingResult bindingResult) throws Exception {
 
+		
+		
 		logger.info("/join post 요청");
 		
 		if(bindingResult.hasErrors()) {
@@ -58,8 +64,11 @@ public class MemberController {
 			
 		} else {
 			
+			String encPassword = passwordEncoder.encode(memberVO.getUserpwd());
+			memberVO.setUserpwd(encPassword);
 			
-			logger.info("전달 데이터 : " + memberVO);
+			logger.info("비밀번호 암호화 처리 완료");
+			logger.info("암호화된 비밀번호 : "+ memberVO.getUserpwd());
 			
 			memberService.create(memberVO);
 			

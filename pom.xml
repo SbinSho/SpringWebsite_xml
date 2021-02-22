@@ -13,7 +13,7 @@
 
 	<properties>
 		<java-version>1.8</java-version>
-		<org.springframework-version>4.3.8.RELEASE</org.springframework-version>
+		<org.springframework-version>4.2.9.RELEASE</org.springframework-version>
 		<org.aspectj-version>1.6.10</org.aspectj-version>
 		<org.slf4j-version>1.6.6</org.slf4j-version>
 	</properties>
@@ -159,8 +159,26 @@
 			<version>2.10.1</version>
 		</dependency>
 
-	</dependencies>
+        <!--스프링시큐리티 web 라이브러리-->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>4.2.20.RELEASE</version>
+        </dependency>
+        <!--스프링시큐리티 core 라이브러리-->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
+            <version>4.2.20.RELEASE</version>
+        </dependency>
+        <!--스프링시큐리티 config 라이브러리-->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>4.2.20.RELEASE</version>
+        </dependency>
 
+	</dependencies>
 
 	<!-- 메이븐 컴파일러 설정 -->
 	<build>
