@@ -61,6 +61,9 @@ public class MemberServiceImpl implements MemberService{
 		
 		logger.info("loginCheck Service 진입");
 		
+		// 반환할 값
+		boolean check = false;
+		
 		// 사용자에게 입력 받은 비밀번호
 		String rawPassword = loginDTO.getPwd();
 		
@@ -68,17 +71,16 @@ public class MemberServiceImpl implements MemberService{
 		MemberVO memberVO = mDao.loginCheck(loginDTO); 
 		
 		if(memberVO != null) {
-			
 			// DB에서 가져온 인코딩된 비밀번호
 			String encodedPassword = memberVO.getUserpwd();
-			
 			if(passwordEncoder.matches(rawPassword, encodedPassword)) {
-				return true;
+				check = true;
 			}
+			
 		}
 		
+		return check;
 		
-		return false;
 	}
 	
 	

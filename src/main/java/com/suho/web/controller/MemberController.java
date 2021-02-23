@@ -1,19 +1,14 @@
 package com.suho.web.controller;
 
-import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.log;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.cookie;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.swing.text.StyledEditorKit.BoldAction;
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -22,13 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import com.suho.web.domain.MemberVO;
 import com.suho.web.dto.LoginDTO;
 import com.suho.web.service.MemberService;
-import com.suho.web.util.AuthInfo;
 @Controller
 @RequestMapping("/member/*")
 public class MemberController {
@@ -43,9 +34,15 @@ public class MemberController {
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login(Model model, 
 			@CookieValue( value = "loginCookie", required = false) Cookie cookie,
-			HttpServletResponse response) {
+			HttpSession session) {
+		
+		if( session.getAttribute("loginUser") != null) {
+			model.addAttribute("result", "wrong");
+			return "redirect:/";
+		}
 		
 		LoginDTO loginDTO = new LoginDTO();
+		
 		
 		if(cookie != null) {
 			loginDTO.setId(cookie.getValue());
@@ -59,7 +56,7 @@ public class MemberController {
 	
 	// 로그인 처리
 	@RequestMapping(value = "/loginPost", method = RequestMethod.POST)
-	public void login(
+	public void loginPOST(
 			@Valid LoginDTO loginDTO, 
 			BindingResult bindingResult,
 			Model model) throws Exception{
@@ -79,14 +76,12 @@ public class MemberController {
 		boolean db_check = memberService.loginCheck(loginDTO);
 		
 		// ID가 DB에서 조회되지 않을 경우 view에 전달할 result값을 model에 저장
-		if(db_check == false) {
+		if(!db_check) {
 			
 			model.addAttribute("result", "fail");
 			return;
 			
 		}
-		
-		model.addAttribute("loginDTO", loginDTO);
 		
 		logger.info("MemberController login POST 탈출");
 		

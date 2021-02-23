@@ -37,22 +37,26 @@
           <li class="nav-item">
             <a class="nav-link" href="#">게시판</a>
           </li>
-          <li class="nav-item">
-          	<c:choose>
+          <c:choose>
           		<c:when test="${ empty loginUser }">
-	            	<a class="nav-link" href="<c:url value='/member/login'/>">로그인</a>
+          			<li class="nav-item">
+	            		<a class="nav-link" href="<c:url value='/member/login'/>">로그인</a>
+          			</li>
+			        <li class="nav-item">
+			            <a class="nav-link" href="<c:url value='/member/join'/>">회원가입</a>
+			        </li>
           		</c:when>
           		<c:otherwise>
-	            	<a class="nav-link" href="<c:url value='/member/logout'/>">
-	            		<span>${ loginUser.id } 님 반갑습니다.</span>
-	            	</a>
+          			<li class="nav-item">
+			            <a class="nav-link" href="<c:url value='/member/logout'/>">
+	            			<span>로그아웃</span>
+	            		</a>
+			        </li>
+			        <li class="nav-item">
+			            <a class="nav-link" href="<c:url value='#'/>">회원정보수정</a>
+			        </li>
           		</c:otherwise>
-    			      	
-          	</c:choose>  	
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="<c:url value='/member/join'/>">회원가입</a>
-          </li>
+          </c:choose>  	
         </ul>
       </div>
     </div>

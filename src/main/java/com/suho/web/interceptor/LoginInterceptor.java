@@ -1,9 +1,5 @@
 package com.suho.web.interceptor;
 
-
-
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
-
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,7 +8,6 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.ui.ModelMap;
-import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
@@ -28,15 +23,14 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		
-		logger.info("handler : " + handler.toString());
 		
 		logger.info("LoginInterceptor preHandle 진입 ");
 		
 		HttpSession session = request.getSession();
 		
 		// 기존의 로그인 정보 제거
-		if( session.getAttribute("auth") != null) {
-			session.removeAttribute("auth");
+		if( session.getAttribute("loginUser") != null) {
+			session.removeAttribute("loginUser");
 		}
 		
 		logger.info("LoginInterceptor preHandle 탈출 ");
@@ -60,14 +54,18 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 		LoginDTO loginDTO = (LoginDTO) map.get("loginDTO");
 		// Controller에서 가져온 model에서 valud_check 키 값에 해당하는 데이터 가져오기
 		Object valid_check = map.get("valid_check");
+		Object db_result = map.get("result");
+		
 		
 		// vaild_check 값이 null일 경우 Contorller에서 객체의 유효성 검사는 통과함을 의미한다.
 		// auth 값이 null일 경우 유효성은 통과했으나, DB에서 ID가 조회되지 않을 경우
-		if( valid_check != null || loginDTO == null) {
+		if( valid_check != null || db_result != null) {
 			
 			modelAndView.setViewName("/member/login");
 			return;
 		}
+		
+		
 		
 		// 세션에 저장할 객체 사용
 		AuthInfo auth = new AuthInfo(loginDTO);
@@ -82,13 +80,15 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 		} else {
 			loginCookie.setMaxAge(0);
 		}
+		
+		
 		response.addCookie(loginCookie);
 		
-		
-		
 		modelAndView.setViewName("redirect:/");
-		
+
 		logger.info("LoginInterceptor postHandle 탈출 ");
+
+		
 		
 	}
 	
