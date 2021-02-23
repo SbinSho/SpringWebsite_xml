@@ -118,13 +118,13 @@
 
         <div class="form-group">
         	<label for="user_id">아이디</label>
-			<form:input  path="userid" id="user_id" type="text" class="form-control" placeholder="아이디" />
+			<form:input  path="userid" id="user_id" class="form-control" placeholder="아이디" />
 			<form:errors path="userid"/>
 			<span id="userid_check"></span>
         </div>
 		<div class="form-group">
 			<label for="user_pwd">비밀번호</label>
-            <form:input  path="userpwd" type="password" class="form-control" id="user_pwd" name="userpwd" 
+            <form:password  path="userpwd" class="form-control" id="user_pwd" name="userpwd" 
             	placeholder="비밀번호" />
             <form:errors path="userpwd" />
            	<span id="password_check"></span>

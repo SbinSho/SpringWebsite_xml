@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <!-- saved from url=(0051)https://getbootstrap.com/docs/4.5/examples/sign-in/ -->
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -45,24 +47,36 @@
     <!-- Custom styles for this template -->
     <link href="/resources/css/signin.css" rel="stylesheet">
   </head>
-  <body class="text-center">
-    <form class="form-signin">
-  <img class="mb-4" src="./Signin Template Â· Bootstrap_files/bootstrap-solid.svg" alt="" width="72" height="72">
-  <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-  <label for="inputEmail" class="sr-only">Email address</label>
-  <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="">
-  <label for="inputPassword" class="sr-only">Password</label>
-  <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="">
-  <div class="checkbox mb-3">
-    <label>
-      <input type="checkbox" value="remember-me"> Remember me
-    </label>
-  </div>
-  <button class="btn btn-lg btn-primary btn-block" type="button" onclick="location.href='/member/join'">회원가입</button>
-  <button class="btn btn-lg btn-primary btn-block" type="submit">로그인</button>
-  <p class="mt-5 mb-3 text-muted">Â© 2017-2020</p>
-</form>
+<body class="text-center">
+	<form:form action="/member/loginPost" commandName="loginDTO" class="form-signin">
+	  	<img class="mb-4" src="./Signin Template Â· Bootstrap_files/bootstrap-solid.svg" alt="" width="72" height="72">
+	  	<div class="form-group">
+	  		<label for="id">아이디</label>
+			<form:input path="id" id="id" class="form-control"/>
+			<span style="color: red"><form:errors path="id"/></span>
+		</div>
+	    <div class="form-group">
+	        <label for="pwd">비밀번호</label>
+			<form:password  path="pwd" id="pwd" class="form-control"/>
+			<span style="color: red"><form:errors path="pwd"/></span>
+	    </div>
+		<div class="checkbox mb-3">
+		    <label for="useCookie">
+		      <form:checkbox path="reid" name="useCookie" /> 아이디 기억하기
+		    </label>
+		</div>
+	  	<button class="btn btn-lg btn-primary btn-block" type="submit">로그인</button>
+	  	<p class="mt-5 mb-3 text-muted">Â© 2017-2020</p>
+	</form:form>
+	
+	<script type="text/javascript">
+		var result = '${result}';
 
+		if(result == "fail"){
+			alert("아이디 또는 비밀번호를 다시 확인해주세요!");
+		}
+		
 
+	</script>
 </body>
 </html>

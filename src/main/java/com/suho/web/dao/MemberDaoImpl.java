@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.suho.web.domain.MemberVO;
+import com.suho.web.dto.LoginDTO;
 
 
 @Repository
@@ -34,7 +35,10 @@ public class MemberDaoImpl implements MemberDao {
 		return sqlSessionTemplate.selectOne("idCheck", userid);
 	}
 
-	
+	@Override
+	public MemberVO loginCheck(LoginDTO loginCommand) throws Exception {
+		return sqlSessionTemplate.selectOne("loginCheck", loginCommand);
+	}
 	
 	
 	

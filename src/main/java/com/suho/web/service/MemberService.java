@@ -2,7 +2,11 @@ package com.suho.web.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import com.suho.web.domain.MemberVO;
+import com.suho.web.dto.LoginDTO;
+import com.suho.web.util.AuthInfo;
 
 public interface MemberService {
 
@@ -15,5 +19,7 @@ public interface MemberService {
 	// 아이디 중복 확인
 	public int idCheck(String userid) throws Exception;
 	
+	// 로그인 처리
+	public boolean loginCheck(LoginDTO loginCommand) throws Exception;
 	
 }

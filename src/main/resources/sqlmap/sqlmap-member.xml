@@ -5,7 +5,7 @@
     
 <mapper namespace="memberDao">
 
-	<insert id="create">
+	<insert id="create" parameterType="memberVO">
 		insert into member (userid, userpwd, username, rdate)
 		values (#{userid}, #{userpwd}, #{username}, now())
 	</insert>
@@ -15,9 +15,17 @@
 	</select>
 
 	<!-- 아이디 확인 -->
-	<select id="idCheck" resultType="int">
+	<select id="idCheck" parameterType="memberVO" resultType="int">
 		select count(*) from member
 		where userid = #{userid}
 	</select>
+	
+	<!-- login 처리 -->
+	<select id="loginCheck" parameterType="loginDTO" resultType="memberVO">
+		select userid, userpwd, username from member
+		where 
+		userid = #{id}
+	</select>
+
 
 </mapper>

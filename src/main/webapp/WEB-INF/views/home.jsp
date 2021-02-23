@@ -25,25 +25,33 @@
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
-      <a class="navbar-brand" href="#">Start Bootstrap</a>
+      <a class="navbar-brand" href="<c:url value='/'/>">Start Bootstrap</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Home
-              <span class="sr-only">(current)</span>
-            </a>
+          <li class="nav-item">
+            <a class="nav-link" href="<c:url value='/'/>">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">About</a>
+            <a class="nav-link" href="#">게시판</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Services</a>
+          	<c:choose>
+          		<c:when test="${ empty loginUser }">
+	            	<a class="nav-link" href="<c:url value='/member/login'/>">로그인</a>
+          		</c:when>
+          		<c:otherwise>
+	            	<a class="nav-link" href="<c:url value='/member/logout'/>">
+	            		<span>${ loginUser.id } 님 반갑습니다.</span>
+	            	</a>
+          		</c:otherwise>
+    			      	
+          	</c:choose>  	
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="<c:url value='/member/login'/>">로그인</a>
+            <a class="nav-link" href="<c:url value='/member/join'/>">회원가입</a>
           </li>
         </ul>
       </div>
@@ -139,14 +147,14 @@
   <!-- Footer -->
   <footer class="py-5 bg-dark">
     <div class="container">
-      <p class="m-0 text-center text-white">Copyright &copy; Your Website 2020</p>
+      <p class="m-0 text-center text-white">Copyright &copy; Your Website 2021</p>
     </div>
     <!-- /.container -->
   </footer>
-
   <!-- Bootstrap core JavaScript -->
   <script src="/resources/js/jquery/jquery.min.js"></script>
   <script src="/resources/css/bootstrap/bootstrap.bundle.min.js"></script>
+
 
 </body>
 

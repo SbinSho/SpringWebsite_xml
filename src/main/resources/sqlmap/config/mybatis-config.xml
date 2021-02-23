@@ -10,8 +10,8 @@
 	</settings>
 	
 	<typeAliases>
-		<typeAlias alias="memberVO" type="com.suho.web.domain.MemberVO"/>
-	
+		<typeAlias type="com.suho.web.domain.MemberVO" alias="memberVO" />
+		<typeAlias type="com.suho.web.dto.LoginDTO" alias="loginDTO"/>
 	</typeAliases>
 
 </configuration>
