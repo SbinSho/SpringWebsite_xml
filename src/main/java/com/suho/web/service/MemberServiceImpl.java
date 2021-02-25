@@ -82,9 +82,15 @@ public class MemberServiceImpl implements MemberService{
 		return check;
 		
 	}
-	
-	
 
+
+	@Override
+	public MemberVO edit(String id) throws Exception {
+		return mDao.edit(id);
+	}
+	
+	
+	
 	
 	
 	

@@ -13,6 +13,8 @@ import com.suho.web.dto.LoginDTO;
 @Repository
 public class MemberDaoImpl implements MemberDao {
 	
+	private static final String NAMESPACE = "com.suho.mapper.MemberMapper";
+	
 	private SqlSessionTemplate sqlSessionTemplate;
 
 	@Autowired
@@ -22,22 +24,27 @@ public class MemberDaoImpl implements MemberDao {
 
 	@Override
 	public void create(MemberVO vo) throws Exception {
-		sqlSessionTemplate.insert("create", vo);
+		sqlSessionTemplate.insert(NAMESPACE + ".create", vo);
 	}
 
 	@Override
 	public List<MemberVO> listAll() throws Exception{
-		return sqlSessionTemplate.selectList("list");
+		return sqlSessionTemplate.selectList(NAMESPACE + ".list");
 	}
 
 	@Override
 	public int idCheck(String userid) throws Exception {
-		return sqlSessionTemplate.selectOne("idCheck", userid);
+		return sqlSessionTemplate.selectOne(NAMESPACE + ".idCheck", userid);
 	}
 
 	@Override
 	public MemberVO loginCheck(LoginDTO loginCommand) throws Exception {
-		return sqlSessionTemplate.selectOne("loginCheck", loginCommand);
+		return sqlSessionTemplate.selectOne(NAMESPACE + ".loginCheck", loginCommand);
+	}
+
+	@Override
+	public MemberVO edit( String id ) throws Exception {
+		return sqlSessionTemplate.selectOne(NAMESPACE + ".select", id);
 	}
 	
 	

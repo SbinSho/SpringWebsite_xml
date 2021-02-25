@@ -106,42 +106,25 @@
 </head>
 <body>
 <div class="signup-form">
-    <form:form id="member_form" commandName="memberVO" method="post" onsubmit="return check()">
-		<h2>회원가입</h2>
-		<p class="hint-text">Create your account. It's free and only takes a minute.</p>
+		<h2>회원정보</h2>
         <div class="form-group">
         	<label for="user_name">이름</label>
-			<form:input path="username" id="user_name" type="text" class="form-control" placeholder="이름"/>
-			<form:errors path="username" />
-			<span id="username_check"></span>
+			<input id="user_name" type="text" class="form-control" value="${ memberVO.username }" readonly/>
         </div>
 
         <div class="form-group">
         	<label for="user_id">아이디</label>
-			<form:input  path="userid" id="user_id" class="form-control" placeholder="아이디" />
-			<form:errors path="userid"/>
-			<span id="userid_check"></span>
+			<input id="user_id" class="form-control" value="${ memberVO.userid }" readonly/>
         </div>
 		<div class="form-group">
-			<label for="user_pwd">비밀번호</label>
-            <form:password  path="userpwd" class="form-control" id="user_pwd" name="userpwd" 
-            	placeholder="비밀번호" />
-            <form:errors path="userpwd" />
-           	<span id="password_check"></span>
+            <button type="button" onclick="location.href='<c:url value='/member/edit/chid/${ memberVO.userid }'/>'" class="btn btn-primary btn-lg btn-block">아이디 변경</button>
         </div>
 		<div class="form-group">
-			<label for="user_con_pwd">비밀번호 재확인</label>
-            <input type="password" class="form-control" id="user_con_pwd" placeholder="비밀번호 확인">
-           	<span id="password_con_check"></span>
+            <button type="button" onclick="location.href='<c:url value='/member/edit/chpass'/>'" class="btn btn-primary btn-lg btn-block">비밀번호 변경</button>
         </div>
 		<div class="form-group">
-            <button type="submit" class="btn btn-primary btn-lg btn-block">회원가입</button>
+            <button type="button" onclick="location.href='<c:url value='/'/>'" class="btn btn-primary btn-lg btn-block">수정취소</button>
         </div>
-    </form:form>
-    
-	<div class="text-center">
-		Already have an account? <a href="<c:url value='/member/login'/>">로그인</a>
-	</div>
 </div>
 
 <script>
@@ -154,31 +137,8 @@
 	var pw_chFlag = false;
 	
 	
-	// 이름 유효성 검사
-	$("#user_name").blur(function(){
-		var isName = /^[가-힣]{2,6}$/;
-		var user_name = $("#user_name").val();
-		
-		if( isName.test(user_name) ){
-			$("#username_check").css("color", "green");
-			$("#username_check").html("멋진 이름이네요!");
-
-			nameFlag = true;
-
-		} else {
-			$("#username_check").css("color", "red");
-			$("#username_check").html("이름은 한글로 2~6자 내로 입력해주세요!");
-
-			nameFlag = false;
-			
-		}
-
-	});
-		
-		
-	
 	// 아이디 유효성 검사
-	$("#user_id").blur(function(){
+	$("#user_id").click(function(){
 		// naver ID 정규식 검사
 		var isId = /^[a-z0-9][a-z0-9_\-]{4,19}$/;
 		var userid = $("#user_id").val();
@@ -293,6 +253,7 @@
 		}
 
 	}
+
 
 </script>
 

@@ -19,4 +19,6 @@ public interface MemberDao {
 	// 로그인 처리
 	public MemberVO loginCheck(LoginDTO loginCommand) throws Exception;
 	
+	// 회원정보 수정
+	public MemberVO edit( String id ) throws Exception;
 }

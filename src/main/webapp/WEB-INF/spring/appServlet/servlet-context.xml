@@ -25,13 +25,21 @@
 	
 	<!-- 인터셉터 bean 등록 -->
 	<bean id="loginInterceptor" class="com.suho.web.interceptor.LoginInterceptor" />
-	
+	<bean id="authLoginInterceptor" class="com.suho.web.interceptor.AuthLoginInterceptor" />
+		
 	<mvc:interceptors>
 		<mvc:interceptor>
-			<mvc:mapping path="/member/loginPost"/>
+			<mvc:mapping path="/member/login"/>
 			<ref bean="loginInterceptor" />
 		</mvc:interceptor>
+		
+		<mvc:interceptor>
+			<mvc:mapping path="/member/logout"/>
+			<mvc:mapping path="/member/edit"/>
+			<ref bean="authLoginInterceptor" />
+		</mvc:interceptor>
 	</mvc:interceptors>
+	
 	
 	<context:component-scan base-package="com.suho.web" />	
 	

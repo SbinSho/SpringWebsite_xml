@@ -1,5 +1,6 @@
 package com.suho.web.interceptor;
 
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -28,14 +29,14 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 		
 		HttpSession session = request.getSession();
 		
-		// 기존의 로그인 정보 제거
-		if( session.getAttribute("loginUser") != null) {
-			session.removeAttribute("loginUser");
+		// 세션에 저장된 유저가 없을 시에만 진입허용
+		if( session.getAttribute("loginUser") == null) {
+			return true;
 		}
 		
-		logger.info("LoginInterceptor preHandle 탈출 ");
+		response.sendRedirect("/");
+		return false;
 		
-		return true;
 	}
 
 	// postHandle() : 컨트롤러가 수행되고 화면이 보여지기 직전에 수행되는 메소드
@@ -45,31 +46,34 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 		
 		logger.info("LoginInterceptor postHandle 진입 ");
 		
-		// 현재 요청의 세션 가져오기
-		HttpSession session = request.getSession();
-		// Controller 에서 사용된 데이터 전부 ModelMap에 담음
-		ModelMap map = modelAndView.getModelMap();
-		
-		// Controller에서 가져온 model에서 auth 키 값에 해당하는 데이터 가져오기
-		LoginDTO loginDTO = (LoginDTO) map.get("loginDTO");
-		// Controller에서 가져온 model에서 valud_check 키 값에 해당하는 데이터 가져오기
-		Object valid_check = map.get("valid_check");
-		Object db_result = map.get("result");
-		
-		
-		// vaild_check 값이 null일 경우 Contorller에서 객체의 유효성 검사는 통과함을 의미한다.
-		// auth 값이 null일 경우 유효성은 통과했으나, DB에서 ID가 조회되지 않을 경우
-		if( valid_check != null || db_result != null) {
-			
-			modelAndView.setViewName("/member/login");
+		// 현재 요청 방식이 GET 방식이면 메소드 종료
+		if(request.getMethod().equals("GET")) {
 			return;
 		}
 		
+		// 현재 요청의 세션 가져오기
+		// Controller 에서 사용된 데이터 전부 ModelMap에 담음
+		HttpSession session = request.getSession();
+		ModelMap map = modelAndView.getModelMap();
+
+		LoginDTO loginDTO = (LoginDTO) map.get("loginDTO");
 		
+		Object valid_check = map.get("valid_check");
+		Object db_check = map.get("db_check");
+		
+		// vaild_check 값이 null일 경우 Contorller에서 객체의 유효성 검사는 통과함
+		// db_check 값이 null일 경우 유효성은 통과했으나, DB에서 ID가 조회되지 않을 경우
+		if( valid_check != null || db_check != null) {
+			
+			modelAndView.setViewName("/member/login");
+			return;
+			
+		}
 		
 		// 세션에 저장할 객체 사용
 		AuthInfo auth = new AuthInfo(loginDTO);
 		
+		// 세션에 현재 사용자 정보 저장
 		session.setAttribute("loginUser", auth);
 		
 		Cookie loginCookie = new Cookie("loginCookie", auth.getId());
@@ -83,9 +87,8 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 		
 		
 		response.addCookie(loginCookie);
+		response.sendRedirect("/");
 		
-		modelAndView.setViewName("redirect:/");
-
 		logger.info("LoginInterceptor postHandle 탈출 ");
 
 		

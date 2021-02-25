@@ -10,7 +10,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v4.1.1">
-    <title>Signin Template Â· Bootstrap</title>
+    <title>Hello</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/sign-in/">
 
@@ -48,7 +48,7 @@
     <link href="/resources/css/signin.css" rel="stylesheet">
   </head>
 <body class="text-center">
-	<form:form action="/member/loginPost" commandName="loginDTO" class="form-signin">
+	<form:form commandName="loginDTO" class="form-signin">
 	  	<img class="mb-4" src="./Signin Template Â· Bootstrap_files/bootstrap-solid.svg" alt="" width="72" height="72">
 	  	<div class="form-group">
 	  		<label for="id">아이디</label>
@@ -70,9 +70,9 @@
 	</form:form>
 	
 	<script type="text/javascript">
-		var result = '${result}';
+		var db_check = '${db_check}';
 
-		if(result == "fail"){
+		if(db_check == "fail"){
 			alert("아이디 또는 비밀번호를 다시 확인해주세요!");
 		}
 		

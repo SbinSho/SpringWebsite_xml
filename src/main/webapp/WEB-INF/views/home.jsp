@@ -10,7 +10,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Business Frontpage - Start Bootstrap Template</title>
+  <title>Hello</title>
 
   <!-- Bootstrap core CSS -->
   <link href="/resources/css/bootstrap/bootstrap.min.css" rel="stylesheet">
@@ -53,7 +53,7 @@
 	            		</a>
 			        </li>
 			        <li class="nav-item">
-			            <a class="nav-link" href="<c:url value='#'/>">회원정보수정</a>
+			            <a class="nav-link" href="<c:url value='/member/edit'/>">회원정보수정</a>
 			        </li>
           		</c:otherwise>
           </c:choose>  	
@@ -159,7 +159,16 @@
   <script src="/resources/js/jquery/jquery.min.js"></script>
   <script src="/resources/css/bootstrap/bootstrap.bundle.min.js"></script>
 
+  <script>
+	var join_result = '${join_result}';
 
+	if ( join_result == "join_success"){
+		alert("회원가입 완료!");
+	}
+	
+	
+
+  </script>
 </body>
 
 </html>
