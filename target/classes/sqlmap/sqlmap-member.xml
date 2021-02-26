@@ -5,28 +5,37 @@
     
 <mapper namespace="com.suho.mapper.MemberMapper">
 
+	<!-- 회원가입 -->
 	<insert id="create" parameterType="memberVO">
 		insert into member (userid, userpwd, username, rdate)
 		values (#{userid}, #{userpwd}, #{username}, now())
 	</insert>
 
-	<select id="select" parameterType="String" resultType="memberVO">
-		SELECT * FROM member
-		where userid = #{id}
-	</select>
 
 	<!-- 아이디 확인 -->
 	<select id="idCheck" parameterType="memberVO" resultType="int">
-		select count(*) from member
-		where userid = #{userid}
+		SELECT count(*) from member
+		WHERE userid = #{userid}
 	</select>
 	
 	<!-- login 처리 -->
 	<select id="loginCheck" parameterType="loginDTO" resultType="memberVO">
-		select userid, userpwd, username from member
-		where 
+		SELECT userid, userpwd, username from member
+		WHERE 
 		userid = #{id}
 	</select>
 	
-
+	<!-- id값을 가지고 회원 조회 -->
+	<select id="select" parameterType="String" resultType="memberVO">
+		SELECT * FROM member
+		WHERE userid = #{id}
+	</select>
+	
+	<!-- 회원 ID 수정 -->
+	<update id="idUpDate" parameterType="memberIdDTO">
+		UPDATE MEMBER 
+		SET userid = #{ch_userid}
+		WHERE userid = #{userid}
+	</update>
+	
 </mapper>

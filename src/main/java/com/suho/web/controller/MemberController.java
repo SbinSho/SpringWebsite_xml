@@ -22,6 +22,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.suho.web.domain.MemberVO;
 import com.suho.web.dto.LoginDTO;
+import com.suho.web.dto.MemberIdDTO;
 import com.suho.web.service.MemberService;
 import com.suho.web.util.AuthInfo;
 @Controller
@@ -158,11 +159,36 @@ public class MemberController {
 		AuthInfo auth = (AuthInfo)session.getAttribute("loginUser");
 		String id = auth.getId();
 		
-		MemberVO memberVO = memberService.edit(id);
+		MemberVO memberVO = memberService.select(id);
+		
+		logger.info("불러온 회원 정보 : " + memberVO.toString());
 		
 		model.addAttribute("memberVO", memberVO);
 		
 		return "/member/edit";
+	}
+	
+	
+	// 아이디 수정페이지 이동
+	@RequestMapping(value = "/edit/chid/{userid}", method = RequestMethod.GET)
+	public String editChId(@PathVariable("userid") String userid, Model model) throws Exception {
+
+		MemberIdDTO memberIdDTO = new MemberIdDTO();
+		memberIdDTO.setUserid(userid);
+		
+		model.addAttribute("memberIdDTO", memberIdDTO);
+		
+		return "/member/chid";
+	}
+	
+	// 아이디 수정
+	@RequestMapping(value = "/edit/chid/{userid}", method = RequestMethod.POST)
+	public String editChId(
+			MemberIdDTO memberIdDTO,
+			Model model) throws Exception {
+		
+		
+		return "redirect:/";
 	}
 	
 	// 비밀번호 수정페이지 이동
@@ -170,15 +196,6 @@ public class MemberController {
 	public String editChPass() throws Exception {
 		
 		return "/member/chpass";
-	}
-	
-	// 아이디 수정페이지 이동
-	@RequestMapping(value = "/edit/chid/{userid}", method = RequestMethod.GET)
-	public String editChId(@PathVariable("userid") String userid, Model model) throws Exception {
-
-		model.addAttribute("userid", userid);
-		
-		return "/member/chid";
 	}
 	
 }

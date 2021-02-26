@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import com.suho.web.dao.MemberDao;
 import com.suho.web.domain.MemberVO;
 import com.suho.web.dto.LoginDTO;
+import com.suho.web.dto.MemberIdDTO;
 import com.suho.web.util.AuthInfo;
 
 @Service
@@ -83,10 +84,16 @@ public class MemberServiceImpl implements MemberService{
 		
 	}
 
-
+	// 회원정보 조회
 	@Override
-	public MemberVO edit(String id) throws Exception {
-		return mDao.edit(id);
+	public MemberVO select(String id) throws Exception {
+		return mDao.select(id);
+	}
+
+	// 회원 ID 변경
+	@Override
+	public int eidt_id(MemberIdDTO memberIdDTO) throws Exception {
+		return mDao.eidt_id(memberIdDTO);
 	}
 	
 	

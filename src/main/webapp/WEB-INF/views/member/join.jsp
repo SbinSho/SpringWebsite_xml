@@ -10,9 +10,12 @@
 	<title>Hello</title>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+	
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+	
+	<link href="/resources/css/bootstrap/bootstrap.min.css" rel="stylesheet">
+	
 	<style>
 	body {
 		color: #fff;
@@ -106,7 +109,7 @@
 </head>
 <body>
 <div class="signup-form">
-    <form:form id="member_form" commandName="memberVO" method="post" onsubmit="return check()">
+    <form:form id="member_form" commandName="memberVO" method="post" onsubmit="return check();">
 		<h2>회원가입</h2>
 		<p class="hint-text">Create your account. It's free and only takes a minute.</p>
         <div class="form-group">
@@ -295,6 +298,6 @@
 	}
 
 </script>
-
+	
 </body>
 </html>

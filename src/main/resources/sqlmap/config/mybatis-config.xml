@@ -12,6 +12,7 @@
 	<typeAliases>
 		<typeAlias type="com.suho.web.domain.MemberVO" alias="memberVO" />
 		<typeAlias type="com.suho.web.dto.LoginDTO" alias="loginDTO"/>
+		<typeAlias type="com.suho.web.dto.MemberIdDTO" alias="memberIdDTO"/>
 	</typeAliases>
 
 </configuration>

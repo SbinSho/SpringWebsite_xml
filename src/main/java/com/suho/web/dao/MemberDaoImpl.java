@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.suho.web.domain.MemberVO;
 import com.suho.web.dto.LoginDTO;
+import com.suho.web.dto.MemberIdDTO;
 
 
 @Repository
@@ -43,8 +44,13 @@ public class MemberDaoImpl implements MemberDao {
 	}
 
 	@Override
-	public MemberVO edit( String id ) throws Exception {
+	public MemberVO select( String id ) throws Exception {
 		return sqlSessionTemplate.selectOne(NAMESPACE + ".select", id);
+	}
+
+	@Override
+	public int eidt_id(MemberIdDTO memberIdDTO) throws Exception {
+		return sqlSessionTemplate.update(NAMESPACE + ".idUpDate" , memberIdDTO);
 	}
 	
 	

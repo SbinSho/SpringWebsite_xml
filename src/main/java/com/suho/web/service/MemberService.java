@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import com.suho.web.domain.MemberVO;
 import com.suho.web.dto.LoginDTO;
+import com.suho.web.dto.MemberIdDTO;
 import com.suho.web.util.AuthInfo;
 
 public interface MemberService {
@@ -22,6 +23,9 @@ public interface MemberService {
 	// 로그인 처리
 	public boolean loginCheck(LoginDTO loginCommand) throws Exception;
 	
-	// 회원정보 수정
-	public MemberVO edit(String id) throws Exception;
+	// 회원정보 조회
+	public MemberVO select(String id) throws Exception;
+	
+	// 회원 ID 변경
+	public int eidt_id( MemberIdDTO memberIdDTO) throws Exception;
 }
