@@ -188,6 +188,13 @@ public class MemberController {
 			Model model) throws Exception {
 		
 		
+		logger.info("아이디 수정 : " + memberIdDTO.toString());
+		
+		memberService.eidt_id(memberIdDTO);
+	
+		logger.info("회원정보 수정 완료 " );
+		
+		
 		return "redirect:/";
 	}
 	

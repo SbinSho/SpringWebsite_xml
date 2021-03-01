@@ -5,7 +5,6 @@ import org.hibernate.validator.constraints.NotBlank;
 public class MemberIdDTO {
 	
 	private String userid;
-	
 	@NotBlank(message = "아이디를 입력해주세요.")
 	private String ch_userid;
 
@@ -25,5 +24,11 @@ public class MemberIdDTO {
 		this.ch_userid = ch_userid;
 	}
 
+	@Override
+	public String toString() {
+		return "MemberIdDTO [userid=" + userid + ", ch_userid=" + ch_userid + "]";
+	}
+	
+	
 	
 }

@@ -118,7 +118,7 @@
 
         <div class="form-group">
         	<label for="ch_userid">변경 할 아이디</label>
-        	<form:input path="ch_userid" id="ch_userid" value="${ ch_userid }" readonly="true" class="form-control" />
+        	<form:input path="ch_userid" id="ch_userid" value="${ ch_userid }" class="form-control" />
         	<form:errors path="ch_userid" />
         </div>
 		<div class="form-group">
