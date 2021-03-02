@@ -35,7 +35,7 @@
             <a class="nav-link" href="<c:url value='/'/>">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">게시판</a>
+            <a class="nav-link" href="<c:url value='/board/home'/>">게시판</a>
           </li>
           <c:choose>
           		<c:when test="${ empty loginUser }">
@@ -53,7 +53,7 @@
 	            		</a>
 			        </li>
 			        <li class="nav-item">
-			            <a class="nav-link" href="<c:url value='/member/edit'/>">회원정보수정</a>
+			            <a class="nav-link" href="<c:url value='/member/edit/${ loginUser.id }'/>">회원정보수정</a>
 			        </li>
           		</c:otherwise>
           </c:choose>  	

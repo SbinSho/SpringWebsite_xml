@@ -129,7 +129,7 @@
             <button type="submit" class="btn btn-primary btn-lg btn-block">수정하기</button>
         </div>
 		<div class="form-group">
-            <button type="button" onclick="history.back();" class="btn btn-primary btn-lg btn-block">뒤로가기</button>
+            <button type="button" onclick="history.back();" class="btn btn-danger btn-lg btn-block">뒤로가기</button>
         </div>
     </form:form>
 </div>

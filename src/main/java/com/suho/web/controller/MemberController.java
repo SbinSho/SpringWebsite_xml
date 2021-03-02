@@ -2,7 +2,6 @@ package com.suho.web.controller;
 
 
 import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -11,7 +10,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,7 +24,6 @@ import com.suho.web.dto.LoginDTO;
 import com.suho.web.dto.MemberIdDTO;
 import com.suho.web.dto.MemberPassDTO;
 import com.suho.web.service.MemberService;
-import com.suho.web.util.AuthInfo;
 @Controller
 @RequestMapping("/member/**")
 public class MemberController {
@@ -156,13 +153,12 @@ public class MemberController {
 	}
 	
 	// 회원정보 수정페이지 이동
-	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-	public String edit(HttpSession session, Model model) throws Exception {
+	@RequestMapping(value = "/edit/{userid}", method = RequestMethod.GET)
+	public String edit(@PathVariable("userid") String userid, Model model) throws Exception {
+
 		
-		AuthInfo auth = (AuthInfo)session.getAttribute("loginUser");
-		String id = auth.getId();
 		
-		MemberVO memberVO = memberService.select(id);
+		MemberVO memberVO = memberService.select(userid);
 		
 		logger.info("불러온 회원 정보 : " + memberVO.toString());
 		
