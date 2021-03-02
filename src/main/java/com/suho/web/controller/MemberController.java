@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,6 +24,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.suho.web.domain.MemberVO;
 import com.suho.web.dto.LoginDTO;
 import com.suho.web.dto.MemberIdDTO;
+import com.suho.web.dto.MemberPassDTO;
 import com.suho.web.service.MemberService;
 import com.suho.web.util.AuthInfo;
 @Controller
@@ -83,6 +85,7 @@ public class MemberController {
 		if(!db_check) {
 			
 			model.addAttribute("db_check", "fail");
+			model.addAttribute("result", "error");
 			return;
 			
 		}
@@ -183,24 +186,61 @@ public class MemberController {
 	
 	// 아이디 수정
 	@RequestMapping(value = "/edit/chid/{userid}", method = RequestMethod.POST)
-	public String editChId(
-			MemberIdDTO memberIdDTO,
-			Model model) throws Exception {
+	public String editChId(	MemberIdDTO memberIdDTO, Model model ) throws Exception {
 		
 		
 		logger.info("아이디 수정 : " + memberIdDTO.toString());
 		
-		memberService.eidt_id(memberIdDTO);
+		int result = memberService.edit_id(memberIdDTO);
 	
+		if( result == 0) {
+			
+			model.addAttribute("result", "error");
+			
+			return "/member/chid";
+		}
+		
+		
 		logger.info("회원정보 수정 완료 " );
 		
+		model.addAttribute("result", "OK");
+		model.addAttribute("edit","아이디");
 		
-		return "redirect:/";
+		return "/member/editOK";
 	}
 	
 	// 비밀번호 수정페이지 이동
-	@RequestMapping(value = "/edit/chpass", method = RequestMethod.GET)
-	public String editChPass() throws Exception {
+	@RequestMapping(value = "/edit/chpass/{userid}", method = RequestMethod.GET)
+	public String editChPass(@PathVariable("userid") String userid, Model model) throws Exception {
+		
+		MemberPassDTO memberPassDTO = new MemberPassDTO();
+		memberPassDTO.setUserid(userid);
+		
+		model.addAttribute("memberPassDTO", memberPassDTO);
+		
+		return "/member/chpass";
+	}
+	
+	// 비밀번호 수정
+	@RequestMapping(value = "/edit/chpass/{userid}", method = RequestMethod.POST)
+	public String editChPass( @PathVariable("userid") String userid, MemberPassDTO memberPassDTO, Model model) throws Exception {
+		
+		logger.info("비밀번호 수정 : " + memberPassDTO.toString());
+		
+		int result = memberService.edit_pass(memberPassDTO);
+		
+		
+		if(result == 1) {
+			logger.info("비밀번호 수정 완료");
+			
+			model.addAttribute("result", "OK");
+			model.addAttribute("edit", "비밀번호");
+			
+			return "/member/editOK";
+			
+		}
+		
+		model.addAttribute("result", "error");
 		
 		return "/member/chpass";
 	}

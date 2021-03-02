@@ -38,4 +38,12 @@
 		WHERE userid = #{userid}
 	</update>
 	
+	<!-- 회원 비밀번호 수정 -->
+	<update id="passUpDate" parameterType="memberPassDTO">
+		UPDATE MEMBER
+		SET userpwd = #{ ch_userpwd }
+		WHERE
+		userid = #{ userid }
+	</update>
+	
 </mapper>

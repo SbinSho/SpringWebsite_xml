@@ -134,6 +134,13 @@
 </div>
 
 <script type="text/javascript">
+
+	var result = "${result}";
+
+	if(result == "error"){
+		alert("잘못된 입력값이 존재합니다. 다시 입력해주세요.\n 증상이 지속 된다면 관리자에게 문의바랍니다.");
+	}
+
 	// ID 유효성 검증을 위한 변수
 	var vaild_Flag;
 
@@ -152,6 +159,7 @@
 
 		if( ch_userid == ""){
 			alert("아이디를 입력해주세요!");
+			return false;
 		}
 		
 		if(!(isId.test(ch_userid))){

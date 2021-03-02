@@ -106,28 +106,107 @@
 </head>
 <body>
 <div class="signup-form">
-    <form id="member_form" method="post" onsubmit="return check()">
+    <form:form commandName="memberPassDTO" method="post" onsubmit="return check()">
+        <form:hidden path="userid"/>
         <div class="form-group">
-        	<label for="npass">현재 비밀번호</label>
-        	<input type="text" id="npass" class="form-control">
+        	<label for="userpwd">현재 비밀번호</label>
+        	<form:password path="userpwd" id="userpwd" class="form-control" />
+        	<form:errors path="userpwd" />
         </div>
 
         <div class="form-group">
-        	<label for="nnpass">새 비밀번호</label>
-        	<input type="text" id="nnpass" class="form-control">
+        	<label for="ch_userpwd">새 비밀번호</label>
+        	<form:password path="ch_userpwd" id="ch_userpwd" class="form-control" />
+        	<form:errors path="ch_userpwd" />
+        	<span id="password_check"></span>
         </div>
         <div class="form-group">
-        	<label for="nnnpass">새 비밀번호 확인</label>
-        	<input type="text" id="nnnpass" class="form-control">
+        	<label for="ch_userpwd_confirm">새 비밀번호 확인</label>
+        	<input type="password" id="ch_userpwd_confirm" class="form-control">
+        	<span id="password_con_check"></span>
         </div>
 		<div class="form-group">
-            <button type="button" class="btn btn-primary btn-lg btn-block">수정하기</button>
+            <button type="submit" class="btn btn-primary btn-lg btn-block">수정하기</button>
         </div>
 		<div class="form-group">
             <button type="button" onclick="history.back();" class="btn btn-primary btn-lg btn-block">뒤로가기</button>
         </div>
-    </form>
+    </form:form>
 </div>
+
+<script type="text/javascript">
+
+	var result = "${result}";
+	if(result == "error"){
+		alert("비밀번호를 확인해주세요!");
+	}
+
+	var isPW = /^.*(?=.{6,20})(?=.*[0-9])(?=.*[a-zA-Z]).*$/;
+
+	var pwFlag;
+    var ch_pwFlag;
+	
+	// 비밀번호 유효성 검사
+	$("#ch_userpwd").blur(function(){
+		var ch_userpwd = $("#ch_userpwd").val();
+		
+		if(isPW.test(ch_userpwd)){
+			$("#password_check").css("color", "green");
+			$("#password_check").html("비밀번호 사용가능!");
+			pwFlag = true;
+		}
+		else {
+			$("#password_check").css("color", "red");
+			$("#password_check").html("영문,숫자를 혼합하여 6~20자 이내로 입력해주세요.");
+			pwFlag = false;		
+		}
+
+	});
+
+	// 비밀번호 확인란 체크
+	$("#ch_userpwd_confirm").blur(function(){
+		
+		var ch_userpwd = $("#ch_userpwd").val();
+		var ch_userpwd_confirm = $("#ch_userpwd_confirm").val();
+
+		if( ch_userpwd == ch_userpwd_confirm){
+			$("#password_con_check").css("color", "green");
+			$("#password_con_check").html("패스워드 확인 완료!");
+			pw_chFlag = true;
+			
+		} else {
+			$("#password_con_check").css("color", "red");
+			$("#password_con_check").html("비밀번호를 확인해주세요.");
+			pw_chFlag = false;
+			
+		}
+
+
+	});
+	
+	function check() {
+
+		var userpwd = $("#userpwd").val();
+		var ch_userpwd = $("ch_userpwd").val();
+		var ch_userpwd_confirm = $("ch_userpwd_confirm").val();
+
+		if( userpwd == "" || ch_userpwd == "" || ch_userpwd_confirm == ""){
+
+			alert("입력되지 않은 정보가 있습니다.");
+			return false;
+		}
+
+		if ( pw_Flag == true && ch_pwFlag == true){
+			return true;
+		}
+		else {
+			alert("잘못된 입력 정보가 있습니다!");
+			return false;
+		}
+	}
+
+	
+</script>
 
 </body>
 </html>

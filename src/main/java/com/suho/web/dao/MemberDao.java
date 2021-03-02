@@ -5,6 +5,7 @@ import java.util.List;
 import com.suho.web.domain.MemberVO;
 import com.suho.web.dto.LoginDTO;
 import com.suho.web.dto.MemberIdDTO;
+import com.suho.web.dto.MemberPassDTO;
 
 public interface MemberDao {
 
@@ -24,5 +25,8 @@ public interface MemberDao {
 	public MemberVO select( String id ) throws Exception;
 	
 	// 회원 ID 변경
-	public int eidt_id( MemberIdDTO memberIdDTO) throws Exception;
+	public int edit_id( MemberIdDTO memberIdDTO) throws Exception;
+	
+	// 회원 비밀번호 변경
+	public int edit_pass( MemberPassDTO memberPassDTO ) throws Exception;
 }

@@ -120,7 +120,7 @@
             <button type="button" onclick="location.href='<c:url value='/member/edit/chid/${ memberVO.userid }'/>'" class="btn btn-primary btn-lg btn-block">아이디 변경</button>
         </div>
 		<div class="form-group">
-            <button type="button" onclick="location.href='<c:url value='/member/edit/chpass'/>'" class="btn btn-primary btn-lg btn-block">비밀번호 변경</button>
+            <button type="button" onclick="location.href='<c:url value='/member/edit/chpass/${ memberVO.userid }'/>'" class="btn btn-primary btn-lg btn-block">비밀번호 변경</button>
         </div>
 		<div class="form-group">
             <button type="button" onclick="location.href='<c:url value='/'/>'" class="btn btn-primary btn-lg btn-block">수정취소</button>

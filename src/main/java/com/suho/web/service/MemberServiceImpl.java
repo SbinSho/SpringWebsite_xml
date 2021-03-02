@@ -14,6 +14,7 @@ import com.suho.web.dao.MemberDao;
 import com.suho.web.domain.MemberVO;
 import com.suho.web.dto.LoginDTO;
 import com.suho.web.dto.MemberIdDTO;
+import com.suho.web.dto.MemberPassDTO;
 import com.suho.web.util.AuthInfo;
 
 @Service
@@ -92,9 +93,39 @@ public class MemberServiceImpl implements MemberService{
 
 	// 회원 ID 변경
 	@Override
-	public int eidt_id(MemberIdDTO memberIdDTO) throws Exception {
-		return mDao.eidt_id(memberIdDTO);
+	public int edit_id(MemberIdDTO memberIdDTO) throws Exception {
+		
+		MemberVO memberVO = mDao.select(memberIdDTO.getCh_userid());
+		
+		if(memberVO == null) {
+			return mDao.edit_id(memberIdDTO);
+		}
+		
+		return 0;
+		
 	}
+
+
+	// 회원 비밀번호 변경
+	@Override
+	public int edit_pass(MemberPassDTO memberPassDTO) throws Exception {
+		
+		int result = 0;
+		MemberVO memberVO = mDao.select(memberPassDTO.getUserid());
+		
+		if(passwordEncoder.matches(memberPassDTO.getUserpwd(), memberVO.getUserpwd())){
+			
+			String encodingPass = passwordEncoder.encode(memberPassDTO.getCh_userpwd());
+			memberPassDTO.setCh_userpwd(encodingPass);
+			
+			result = mDao.edit_pass(memberPassDTO);
+		}
+		
+		return result;
+	}
+
+	
+
 	
 	
 	

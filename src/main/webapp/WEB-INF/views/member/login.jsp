@@ -17,6 +17,8 @@
     <!-- Bootstrap core CSS -->
 	<link href="/resources/css/bootstrap/bootstrap.min.css" rel="stylesheet" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 
+
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
     <!-- Favicons -->
 	<link rel="apple-touch-icon" href="https://getbootstrap.com/docs/4.5/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
 	<link rel="icon" href="https://getbootstrap.com/docs/4.5/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
@@ -59,6 +61,7 @@
 	        <label for="pwd">비밀번호</label>
 			<form:password  path="pwd" id="pwd" class="form-control"/>
 			<span style="color: red"><form:errors path="pwd"/></span>
+			<span style="color: red" id="check"></span>
 	    </div>
 		<div class="checkbox mb-3">
 		    <label for="useCookie">
@@ -70,12 +73,12 @@
 	</form:form>
 	
 	<script type="text/javascript">
-		var db_check = '${db_check}';
-
-		if(db_check == "fail"){
-			alert("아이디 또는 비밀번호를 다시 확인해주세요!");
-		}
+		var result = '${ result }';	
 		
+		if(result == "error"){
+			$("#check").html("아이디 또는 비밀번호를 다시 확인해주세요!");
+		}
+
 
 	</script>
 </body>
