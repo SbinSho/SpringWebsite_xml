@@ -35,7 +35,7 @@
             <a class="nav-link" href="<c:url value='/'/>">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="<c:url value='/board/home'/>">게시판</a>
+            <a class="nav-link" href="<c:url value='/board/listAll'/>">게시판</a>
           </li>
           <c:choose>
           		<c:when test="${ empty loginUser }">

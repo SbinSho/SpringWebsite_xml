@@ -15,6 +15,7 @@ public class BoardServiceImpl implements BoardService {
 	private BoardDao bDao;
 	
 	
+	// 회원 목록 조회
 	@Override
 	public List<MemberVO> listAll() throws Exception {
 		
