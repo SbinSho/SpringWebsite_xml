@@ -8,6 +8,7 @@
 	<select id="listAll" resultType="memberVO">
 	<![CDATA[
 		select * from member
+		order by rdate desc
 	]]> 
 	</select>
 
