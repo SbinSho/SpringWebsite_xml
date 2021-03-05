@@ -8,7 +8,7 @@ public class Criteria {
 	// 한 페이지당 보여줄 게시글의 갯수
 	private int perPageNum;
 	
-	public int getPagStart() {
+	public int getPageStart() {
 		// MySql의 LIMIT 구문 사용
 		// 1 페이지 -> 00행 ~ 09행 ( 10개 ) : LIMIT 0, 10
 		// 2 페이지 -> 10행 ~ 19행 ( 10개 ) : LIMIT 10, 10
@@ -21,18 +21,12 @@ public class Criteria {
 		this.perPageNum = 10;
 	}
 	
-	public int getPage() {
-		return page;
-	}
 	public void setPage(int page) {
 		if(page <= 0) {
 			this.page = 1;
 		} else {
 			this.page = page;
 		}
-	}
-	public int getPerPageNum() {
-		return perPageNum;
 	}
 	public void setPerPageNum(int pageCount) {
 		int cnt = this.perPageNum;
@@ -41,6 +35,14 @@ public class Criteria {
 		} else {
 			this.perPageNum = pageCount;
 		}
+	}
+
+	public int getPage() {
+		return page;
+	}
+
+	public int getPerPageNum() {
+		return perPageNum;
 	}
 	
 	

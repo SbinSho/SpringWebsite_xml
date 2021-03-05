@@ -9,7 +9,7 @@ public class PageMaker {
 	private int endPage;
 	private boolean prev;
 	private boolean next;
-	private int displayPageNnum = 5;
+	private int displayPageNnum = 10;
 	
 	public Criteria getCri() {
 		return cri;
@@ -24,21 +24,24 @@ public class PageMaker {
 		this.totalCount = totalCount;
 		calcData();
 	}
+	
 	private void calcData() {
-		endPage = (int) (Math.ceil(cri.getPage() / (double) displayPageNnum) * displayPageNnum);
-		
+		// 끝 페이지 번호 = ( 현재 페이지 번호 / 화면에 보여질 페이지 번호의 갯수 ) * 화면에 보여질 페이지 번호의 갯수 
+		endPage = (int) ( Math.ceil(cri.getPage() / (double) displayPageNnum ) * displayPageNnum);
+		// 시작 페이지 번호 = ( 끝 페이지 번호 - 화면에 보여질 페이지 번호의 갯수 ) + 1
 		startPage = (endPage - displayPageNnum) + 1;
+		
 		if(startPage <= 0) startPage = 1;
 		
+		// 마지막 페이지 번호 = 총 게시글 수 / 한 페이지당 보여줄 게시글의 갯수 
 		int tempEndPage = (int) (Math.ceil(totalCount / (double) cri.getPerPageNum()));
-		
 		if( endPage > tempEndPage) {
 			endPage = tempEndPage;
 		}
-		
+		// 이전 버튼 생성 여부 = 시작 페이지 번호 == 1 ? false : true
 		prev = startPage == 1 ? false : true;
+		// 다음 버튼 생성 여부 = 끝 페이지 번호 * 한 페이지당 보여줄 게시글의 갯수 < 총 게시글의 수 ? true : false
 		next = endPage * cri.getPerPageNum() < totalCount ? true : false;
-		
 	}
 	
 	public int getStartPage() {

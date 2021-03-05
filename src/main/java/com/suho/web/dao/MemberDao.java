@@ -29,4 +29,6 @@ public interface MemberDao {
 	
 	// 회원 비밀번호 변경
 	public int edit_pass( MemberPassDTO memberPassDTO ) throws Exception;
+	
+	
 }

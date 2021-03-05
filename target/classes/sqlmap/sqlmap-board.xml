@@ -6,10 +6,23 @@
 <mapper namespace="com.suho.mapper.BoardMapper">
 
 	<select id="listAll" resultType="memberVO">
-	<![CDATA[
-		select * from member
-		order by rdate desc
-	]]> 
+		SELECT * FROM MEMBER
+		ORDER BY rdate desc
+	</select>
+
+	<select id="boardCount" resultType="int">
+		SELECT count(*) FROM MEMBER
+	</select>
+	
+	<select id="selectBoardList" resultType="memberVO" parameterType="com.suho.web.domain.Criteria">
+	    <![CDATA[
+	        SELECT
+	            *
+	        FROM
+	            member
+	        ORDER BY rdate DESC
+	        LIMIT #{pageStart}, #{perPageNum}
+	    ]]>
 	</select>
 
 

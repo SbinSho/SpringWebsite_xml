@@ -41,7 +41,9 @@
 	</mvc:interceptors>
 	
 	
-	<context:component-scan base-package="com.suho.web" />	
+	<context:component-scan base-package="com.suho.web.controller" />	
+	<context:component-scan base-package="com.suho.web.service" />	
+	<context:component-scan base-package="com.suho.web.dao" />	
 	
 	
 

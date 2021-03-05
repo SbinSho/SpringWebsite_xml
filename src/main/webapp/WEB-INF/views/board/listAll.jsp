@@ -36,7 +36,22 @@
 	  </tbody>
 	</table>
 
-    <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+
+	<div class="btn-toolbar" role="toolbar"
+		aria-label="Toolbar with button groups">
+		<div class="btn-group m-auto" role="group" aria-label="First group">
+		<c:if test = "${ pageMaker.prev }">
+			<button type="button" class="btn btn-secondary" onclick="location.href='<c:url value="/board/listAll?page=${ pageMaker.startPage-1 }"/>'">이전</button>
+		</c:if>
+		<c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="pageNum">
+			<button type="button" class="btn btn-secondary" onclick="location.href='<c:url value="/board/listAll?page=${ pageNum }"/>'">${ pageNum }</button>
+		</c:forEach>
+		<c:if test="${ pageMaker.next && pageMaker.endPage > 0 }">
+			<button type="button" class="btn btn-secondary" onclick="location.href='<c:url value="/board/listAll?page=${ pageMaker.endPage + 1}"/>'">다음</button>
+		</c:if>
+		</div>
+	</div>
+	<!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
 
