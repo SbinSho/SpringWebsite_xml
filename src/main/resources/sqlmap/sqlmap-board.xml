@@ -25,6 +25,11 @@
 	    ]]>
 	</select>
 
+	<select id="select" resultType="memberVO" parameterType="String">
+		SELECT * FROM member
+		WHERE
+		USERID = #{ userid }
+	</select>
 
 </mapper>
 

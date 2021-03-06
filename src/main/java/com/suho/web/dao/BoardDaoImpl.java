@@ -43,6 +43,12 @@ public class BoardDaoImpl implements BoardDao {
 	public List<MemberVO> selectBoardList(Criteria cri) throws Exception {
 		return sqlSessionTemplate.selectList(NAMESPACE + ".selectBoardList", cri);
 	}
+
+
+	@Override
+	public MemberVO select(String userid) throws Exception {
+		return sqlSessionTemplate.selectOne(NAMESPACE + ".select", userid);
+	}
 	
 	
 }

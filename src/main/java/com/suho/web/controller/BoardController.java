@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.suho.web.domain.Criteria;
@@ -39,6 +40,22 @@ public class BoardController { // 시간단축을 위해 개별의 board 테이�
 		
 		return "/board/listAll";
 		
+	}
+	
+	// 유저 조회
+	@RequestMapping("/read/{userid:.+}") // userid:.+ 구문은 .(콤마) 인식을 위한 구문, 스프링이 .을 기준으로 url을 인식하는것이 문제가 되는것같다.
+	public String read(@PathVariable("userid") String userid, Model model) throws Exception {
+		
+		logger.info("userid : " + userid);
+		
+		MemberVO memberVO = boardService.select(userid);
+		
+		
+		model.addAttribute("memberVO", memberVO);
+		
+//		logger.info(memberVO.toString());
+		
+		return "/board/read";
 	}
 	
 }

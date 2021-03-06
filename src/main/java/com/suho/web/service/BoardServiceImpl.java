@@ -37,6 +37,12 @@ public class BoardServiceImpl implements BoardService {
 		return bDao.selectBoardList(cri);
 	}
 
+
+	@Override
+	public MemberVO select(String userid) throws Exception {
+		return bDao.select(userid);
+	}
+
 	
 	
 	

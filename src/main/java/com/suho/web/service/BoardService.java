@@ -17,4 +17,7 @@ public interface BoardService {
 	// 게시글 LIMIT 조회
 	public List<MemberVO> selectBoardList(Criteria cri) throws Exception;
 
+	// 회원 조회
+	public MemberVO select(String userid) throws Exception;
+	
 }
